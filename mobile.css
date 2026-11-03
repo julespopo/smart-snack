@@ -4,7 +4,7 @@
 /* Respect selected theme on the compact mobile layout */
 .mobile-app .theme-toggle{margin-left:auto;width:35px;height:35px;font-size:19px}
 .mobile-app .language{margin-left:0}
-[data-theme="dark"].mobile-app,[data-theme="dark"] .mobile-app body{background:#17251e}
-[data-theme="dark"] .mobile-app header nav{background:#1d2e24f5;border-color:#405447;box-shadow:0 -5px 20px #0003}
-[data-theme="dark"] .mobile-app nav button.active{background:#526e46;color:#fff}
-@media(min-width:700px){[data-theme="dark"].mobile-app{background:#101a14}}
+html.mobile-app[data-theme="dark"],html.mobile-app[data-theme="dark"] body{background:#17251e}
+html.mobile-app[data-theme="dark"] header nav{background:#1d2e24f5;border-color:#405447;box-shadow:0 -5px 20px #0003}
+html.mobile-app[data-theme="dark"] nav button.active{background:#526e46;color:#fff}
+@media(min-width:700px){html.mobile-app[data-theme="dark"]{background:#101a14}}
