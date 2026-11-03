@@ -6,3 +6,29 @@
 .cover-button{position:relative}.cover,.recipe-photo{filter:saturate(.94) contrast(.98) brightness(1.03)}.photo-kind{position:absolute;left:12px;bottom:12px;background:#faf9f5ed;color:#294b38;padding:5px 8px;border-radius:4px;font-size:9px;letter-spacing:.3px}.photo-credit{font-size:10px;color:#6d7866;line-height:1.6;margin:0 0 15px}.photo-credit a,footer a{color:inherit;text-underline-offset:3px}footer{gap:16px;flex-wrap:wrap}
 
 #addShoppingButton{transition:background .2s,box-shadow .2s;min-height:44px}#addShoppingButton.added{background:#56763c;animation:added-pop .48s ease-out}.added-check{display:inline-block;animation:check-pop .48s ease-out}.shopping-feedback{font-size:12px;line-height:1.7;min-height:24px;color:#476333}.shopping-feedback:not(:empty){animation:feedback-in .3s ease-out}.shopping-feedback .text-button{display:block;padding:6px 0;font-weight:600}.shop-row{min-height:58px;align-items:center;cursor:pointer}.shop-row input{width:24px;height:24px;accent-color:#294b38;flex-shrink:0}.primary:disabled{opacity:.5;cursor:default}@keyframes added-pop{0%{transform:scale(1)}40%{transform:scale(1.045);box-shadow:0 0 0 7px #c8dcad77}100%{transform:scale(1);box-shadow:0 0 0 0 #c8dcad00}}@keyframes check-pop{0%{transform:scale(.3) rotate(-30deg)}70%{transform:scale(1.25)}100%{transform:scale(1)}}@keyframes feedback-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}@media(prefers-reduced-motion:reduce){#addShoppingButton.added,.added-check,.shopping-feedback:not(:empty){animation:none}}
+
+/* Accessible theme switch and direct recipe-title opening */
+.theme-toggle{border:1px solid #d7dbcf;border-radius:50%;background:transparent;color:var(--green);width:38px;height:38px;flex-shrink:0;display:inline-flex;align-items:center;justify-content:center;font-size:20px;cursor:pointer;margin-left:auto}
+.language{flex-shrink:0}
+header{gap:12px}
+.recipe-title{font:inherit;color:inherit;text-align:left;background:transparent;border:0;padding:0;cursor:pointer}
+.recipe-title:hover{text-decoration:underline;text-underline-offset:4px}
+:root[data-theme="dark"]{color-scheme:dark;--cream:#17251e;--ink:#e7eee1;--green:#d9e8c1;--lime:#3d533b;--muted:#b7c7b1}
+[data-theme="dark"] body{background:#17251e;color:#e7eee1}
+[data-theme="dark"] header,[data-theme="dark"] footer,[data-theme="dark"] .workspace{border-color:#3b5143}
+[data-theme="dark"] .card,[data-theme="dark"] .search,[data-theme="dark"] .toolbar select,[data-theme="dark"] .meal,[data-theme="dark"] .card-link,[data-theme="dark"] .close,[data-theme="dark"] .portions button,[data-theme="dark"] .wizard-choice,[data-theme="dark"] .shop-row,[data-theme="dark"] .outline{background:#26382e;color:#e7eee1;border-color:#455b48}
+[data-theme="dark"] .card h3,[data-theme="dark"] .card h3 button,[data-theme="dark"] .brand,[data-theme="dark"] nav button,[data-theme="dark"] .text-button,[data-theme="dark"] .language,[data-theme="dark"] .theme-toggle{color:#d9e8c1}
+[data-theme="dark"] .search input{color:#e7eee1}
+[data-theme="dark"] .search input::placeholder{color:#a9bba5}
+[data-theme="dark"] .meal.active,[data-theme="dark"] .primary,[data-theme="dark"] .chip.on,[data-theme="dark"] nav button.active{background:#526e46;color:#fff}
+[data-theme="dark"] .chip,[data-theme="dark"] .tag,[data-theme="dark"] .photo-kind,[data-theme="dark"] .wizard-icon,[data-theme="dark"] .mobile-summary button{background:#344a3a;border-color:#4b644e;color:#dce9ca}
+[data-theme="dark"] .bottom-note,[data-theme="dark"] .nutrition div,[data-theme="dark"] .tip,[data-theme="dark"] .empty,[data-theme="dark"] .float-label{background:#2e4334;color:#e7eee1;border-color:#17251e}
+[data-theme="dark"] dialog{background:#202f26;color:#e7eee1}
+[data-theme="dark"] dialog::backdrop{background:#08150cdd}
+[data-theme="dark"] .heart{background:#203229e8;color:#d9e8c1}
+[data-theme="dark"] .card,[data-theme="dark"] .search,[data-theme="dark"] .toolbar select{border-color:#3b5143}
+[data-theme="dark"] .wizard-choice.selected{background:#3d533b;border-color:#96b080}
+[data-theme="dark"] .wizard-progress span{background:#405447}
+[data-theme="dark"] .wizard-progress span.done{background:#9cb67d}
+[data-theme="dark"] .wizard-description,[data-theme="dark"] .wizard-copy small,[data-theme="dark"] .wizard-footnote,[data-theme="dark"] .mobile-result-count,[data-theme="dark"] .card-meta,[data-theme="dark"] .card p,[data-theme="dark"] .recipe-columns li,[data-theme="dark"] .disclaimer{color:#b7c7b1}
+[data-theme="dark"] #toast{background:#d9e8c1;color:#17251e}
