@@ -8,3 +8,17 @@ html.mobile-app[data-theme="dark"],html.mobile-app[data-theme="dark"] body{backg
 html.mobile-app[data-theme="dark"] header nav{background:#1d2e24f5;border-color:#405447;box-shadow:0 -5px 20px #0003}
 html.mobile-app[data-theme="dark"] nav button.active{background:#526e46;color:#fff}
 @media(min-width:700px){html.mobile-app[data-theme="dark"]{background:#101a14}}
+
+/* Compact, stable navigation and fewer competing actions on results. */
+.mobile-app header nav{padding:8px 10px max(9px,env(safe-area-inset-bottom));gap:6px}
+.mobile-app nav button{display:flex;flex-direction:column;gap:4px;position:relative;min-height:57px;font-size:10px;padding:7px 4px;border-radius:13px}
+.mobile-app nav button.active{padding:7px 4px}.mobile-app nav button>.ui-icon{width:21px;height:21px}.mobile-app .nav-count{position:absolute;top:2px;left:calc(50% + 6px);min-width:17px;height:17px;font-size:9px;border:2px solid var(--cream);padding:0 3px}
+.mobile-app .mobile-summary{gap:7px}.mobile-app .mobile-summary>span{display:inline-flex;align-items:center;gap:5px;padding:7px 10px;border-radius:20px;background:#edf2e4;color:#526744;font-size:11px}
+.mobile-app .mobile-result-tools{gap:10px;margin-top:18px;align-items:center}.mobile-app .mobile-result-tools .outline{font-size:12px;padding:11px 13px}.mobile-app .mobile-result-tools .text-button{font-size:11px;gap:5px}.mobile-app .mobile-result-tools .ui-icon{width:16px;height:16px}.mobile-app .mobile-result-count{margin-top:20px}
+.mobile-app .toolbar{display:flex;margin:0 0 18px}.mobile-app .toolbar select{display:none}.mobile-app .search{flex-basis:100%;font-size:22px}.mobile-app .search input{font-size:14px;padding:14px 0}
+.mobile-app .dialog-topbar{padding:10px 14px}.mobile-app .dialog-topbar .eyebrow{font-size:9px;letter-spacing:1px}.mobile-app .dialog-topbar h2{font-size:25px}.mobile-app .dialog-actions{gap:6px}.mobile-app .dialog-topbar .icon-button{width:42px;height:42px}
+.mobile-app .portion-stepper button{width:42px;height:42px}.mobile-app .shopping-secondary{align-items:center;gap:12px}.mobile-app .shopping-secondary .outline{max-width:65%;padding:10px 12px}
+.mobile-app .wizard-choice{min-height:76px}.mobile-app .wizard-choice:disabled{opacity:.45}.mobile-app .wizard-copy small{line-height:1.6}.mobile-app .wizard-choice:focus{outline:none}.mobile-app .wizard-choice:focus-visible{outline:3px solid #91a76a;outline-offset:3px}.mobile-app .wizard-back{justify-content:flex-start;gap:7px}.mobile-app .wizard-back .ui-icon{width:17px;height:17px}
+html.mobile-app[data-theme="dark"] .mobile-summary>span{background:#344a3a;color:#dce9ca}
+html.mobile-app[data-theme="dark"] .nav-count{background:#d9e8c1;color:#17251e;border-color:#1d2e24}
+@media(max-width:350px){.mobile-app main{padding:0 16px}.mobile-app header{padding-left:16px;padding-right:16px}.mobile-app .mobile-result-tools{flex-wrap:wrap}.mobile-app .brand{font-size:24px}}
