@@ -62,3 +62,8 @@ nav button{display:inline-flex;align-items:center;justify-content:center;gap:7px
 [data-theme="dark"] .icon-button.is-saved,[data-theme="dark"] .heart.is-saved{background:#526e46;color:#f0f8e6}
 [data-theme="dark"] .portion-stepper{background:#344a3a}[data-theme="dark"] .portion-stepper button{background:transparent;color:#d9e8c1}
 [data-theme="dark"] .portions{border-color:#405447}[data-theme="dark"] .danger-button{color:#e8b4a5}
+.toolbar select{appearance:none;-webkit-appearance:none;min-height:48px;padding:12px 34px;text-align:center;text-align-last:center;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23515d4f' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-size:14px 14px;background-position:right 12px center}
+.toolbar select option{text-align:left}
+[data-theme="dark"] .toolbar select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23e7eee1' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")}
+
+[data-theme="dark"] .toolbar select{background-repeat:no-repeat;background-size:14px 14px;background-position:right 12px center}
