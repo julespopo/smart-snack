@@ -405,3 +405,432 @@ for (const p of additionalPhotoSources) {
   );
   Object.assign(recipes[p.id], { img: p.file, photo: photoCredits.find((row) => row.id === p.id) });
 }
+
+// Photos for recipes 50–99 (Wikimedia Commons), applied with the same logic as above.
+const morePhotoSources = [
+  {
+    "id": 50,
+    "author": "Nervy8924",
+    "source": "https://commons.wikimedia.org/wiki/File:Protein_overnight_oats.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-50.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 51,
+    "author": "USDAgov",
+    "source": "https://commons.wikimedia.org/wiki/File:Child_Care_Recipes_(Team_Nutiriton)_(20230123-FNS-UNK-004).jpg",
+    "license": "Public domain",
+    "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-51.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 55,
+    "author": "Jennifer from Vancouver, Canada",
+    "source": "https://commons.wikimedia.org/wiki/File:Quinoa_Breakfast_(7865498832).jpg",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-55.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 56,
+    "author": "Missvain",
+    "source": "https://commons.wikimedia.org/wiki/File:Granola_and_yogurt_-_Bubbles_%2B_Brunch_2018_-_Sarah_Stierch_02.jpg",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-56.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 57,
+    "author": "Andy Li",
+    "source": "https://commons.wikimedia.org/wiki/File:Frittata_-_Bam%27s_Kitchen_2024-04-02.jpg",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-57.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 58,
+    "author": "Shisma",
+    "source": "https://commons.wikimedia.org/wiki/File:Banana_bread_slices.jpg",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-58.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 59,
+    "author": "Popo le Chien",
+    "source": "https://commons.wikimedia.org/wiki/File:Clafoutis_cerises.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-59.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 61,
+    "author": "Takeaway",
+    "source": "https://commons.wikimedia.org/wiki/File:Smoked_chicken_and_avocado_wrap.jpg",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-61.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 62,
+    "author": "jules",
+    "source": "https://commons.wikimedia.org/wiki/File:Warm_kipfler_potato_salad.jpg",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-62.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 63,
+    "author": "Geoff Peters from Vancouver, BC, Canada",
+    "source": "https://commons.wikimedia.org/wiki/File:Quinoa_Salad_(5045982815).jpg",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-63.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 64,
+    "author": "Vis M",
+    "source": "https://commons.wikimedia.org/wiki/File:Dal_curry_20230930.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-64.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 65,
+    "author": "Andy Li",
+    "source": "https://commons.wikimedia.org/wiki/File:Salmon_Poke_Bowl_(S)_with_Spicy_mayo_sauce_-_Kitokito.jpg",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-65.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 66,
+    "author": "Benoît Prieur",
+    "source": "https://commons.wikimedia.org/wiki/File:Pizzeria_Bella_Italia_(Cr%C3%A9pieux-la-Pape)_-_Gratin_de_cappelletti.jpg",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-66.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 67,
+    "author": "Israel_photo_gallery",
+    "source": "https://commons.wikimedia.org/wiki/File:Falafel_in_a_pita.jpg",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-67.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 68,
+    "author": "Katrin Gilger",
+    "source": "https://commons.wikimedia.org/wiki/File:Chickenbreast_and_Pea_Risotto_with_Lemon_and_Basil_(4356295008).jpg",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-68.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 69,
+    "author": "Blue Lotus. from Tokio",
+    "source": "https://commons.wikimedia.org/wiki/File:Orata_al_Cartoccio.jpg",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-69.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 71,
+    "author": "Pancrat",
+    "source": "https://commons.wikimedia.org/wiki/File:Fromage-blanc1_cropped.jpg",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-71.jpg",
+    "kind": "ingredient",
+    "note": "Ingredient photograph from Wikimedia Commons; resized for display."
+  },
+  {
+    "id": 72,
+    "author": "Andy Li",
+    "source": "https://commons.wikimedia.org/wiki/File:Mango_Lassi_and_Butter_Milk_-_Vel_South_Indian_Kitchen_%2B_Bar.jpg",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-72.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 73,
+    "author": "Toa Heftiba heftiba",
+    "source": "https://commons.wikimedia.org/wiki/File:Energy_Balls_(Unsplash).jpg",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-73.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 75,
+    "author": "Plenumchamber",
+    "source": "https://commons.wikimedia.org/wiki/File:Leblebi_f%C4%B1st%C4%B1k.jpg",
+    "license": "Public domain",
+    "licenseUrl": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-75.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 76,
+    "author": "Veganbaking.net from USA",
+    "source": "https://commons.wikimedia.org/wiki/File:Carrot_Cake_Muffins_(4135137580).jpg",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-76.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 77,
+    "author": "Alistair young",
+    "source": "https://commons.wikimedia.org/wiki/File:Flapjacks.jpg",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-77.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 78,
+    "author": "Louiesemendez",
+    "source": "https://commons.wikimedia.org/wiki/File:Brownies_cake.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-78.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 79,
+    "author": "jules",
+    "source": "https://commons.wikimedia.org/wiki/File:The_model_child_chocolate_and_pear_tart,_2007.jpg",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-79.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 80,
+    "author": "AnticoMu90",
+    "source": "https://commons.wikimedia.org/wiki/File:BroccoliPasta.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-80.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 81,
+    "author": "Arnaud 25",
+    "source": "https://commons.wikimedia.org/wiki/File:Omelette_aux_girolles_0001.jpg",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-81.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 82,
+    "author": "Gaurav Dhwaj Khadka",
+    "source": "https://commons.wikimedia.org/wiki/File:Egg_Fried_Rice.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-82.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 83,
+    "author": "Yakshitha",
+    "source": "https://commons.wikimedia.org/wiki/File:Sweet_Potato_Curry.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-83.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 85,
+    "author": "HaJunkiyada",
+    "source": "https://commons.wikimedia.org/wiki/File:Liat_Portal_for_Foodie_Disorder_-_Grilled_salmon_with_sweet_potatoes.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-85.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 86,
+    "author": "Katrin Morenz from Aachen, Deutschland",
+    "source": "https://commons.wikimedia.org/wiki/File:Minestrone_soup.jpg",
+    "license": "CC BY-SA 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-86.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 87,
+    "author": "Waran R Samay",
+    "source": "https://commons.wikimedia.org/wiki/File:Vegetable_pizza_food.jpg",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-87.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 88,
+    "author": "Atelier Joly",
+    "source": "https://commons.wikimedia.org/wiki/File:Fish_Pie.jpg",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-88.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 89,
+    "author": "Arnaud 25",
+    "source": "https://commons.wikimedia.org/wiki/File:Ratatouille_001.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-89.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 91,
+    "author": "Phoenixcatering",
+    "source": "https://commons.wikimedia.org/wiki/File:Crudites_Platter.JPG",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-91.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 94,
+    "author": "Luca Nebuloni from Milan, Italy",
+    "source": "https://commons.wikimedia.org/wiki/File:Avocado_toast_with_eggs_(28508171495).jpg",
+    "license": "CC BY 2.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/2.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-94.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 95,
+    "author": "Harry Wood",
+    "source": "https://commons.wikimedia.org/wiki/File:Jam_and_toast.jpg",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-95.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 97,
+    "author": "Viktorija N. Ivanov",
+    "source": "https://commons.wikimedia.org/wiki/File:%D0%A1%D0%BE%D0%BB%D0%B5%D0%BD%D0%B8_%D0%BC%D0%B0%D1%84%D0%B8%D0%BD%D0%B8_%D1%81%D0%BE_%D1%81%D0%B8%D1%80%D0%B5%D1%9A%D0%B5.jpg",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-97.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  },
+  {
+    "id": 99,
+    "author": "AdriannaNicole",
+    "source": "https://commons.wikimedia.org/wiki/File:Healthy_Snack_Ideas_-_Pita_Bread_Chips_and_Popcorn.JPG",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "position": "50% 50%",
+    "file": "assets/photos/recipe-99.jpg",
+    "kind": "dish",
+    "note": "Serving suggestion from Wikimedia Commons; resized for display, garnish and ingredients may differ."
+  }
+];
+for (const p of morePhotoSources) {
+  Object.assign(
+    photoCredits.find((row) => row.id === p.id),
+    p,
+  );
+  Object.assign(recipes[p.id], { img: p.file, photo: photoCredits.find((row) => row.id === p.id) });
+}
