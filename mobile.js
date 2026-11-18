@@ -1,30 +1,232 @@
-let mobileStep=0,mobileScreen='wizard';const mobileChoices={meal:0,difficulty:0,budget:0};const baseRender=render;
-function mobilePool(difficulty=mobileChoices.difficulty){return recipes.filter(r=>(!mobileChoices.meal||r.meal===mobileChoices.meal)&&(!difficulty||r.difficulty===difficulty))}
-function mobileChoiceCount(stage,value){if(stage===0)return recipes.filter(r=>r.meal===value).length;if(stage===1)return mobilePool(value).length;return mobilePool().filter(r=>!value||r.budget===value).length}
-function mobileCountLabel(n){return tr(`${n} recipe${n===1?'':'s'}`,`${n} recette${n===1?'':'s'}`)}
-function mobileWizard(){const titles=[tr('What’s the occasion?','À quel moment ?'),tr('How adventurous?','Quelle difficulté ?'),tr('What’s your budget?','Quel budget ?')],descriptions=[tr('Start with the moment of your day.','Commençons par le moment de votre journée.'),tr('A quick win or a little cooking challenge?','Une recette toute simple ou un petit défi en cuisine ?'),tr('Choose a price range per serving.','Choisissez une gamme de budget par portion.')];let choices=[];
-if(mobileStep===0)choices=meals().slice(1).map((n,i)=>({value:i+1,title:n,icon:icons[i+1],sub:[tr('A fresh start','Pour bien commencer'),tr('Your midday break','La pause du midi'),tr('A sweet afternoon','Une pause gourmande'),tr('A lovely evening','Pour terminer la journée'),tr('A little something','Une petite faim')][i]}));
-if(mobileStep===1)choices=[{value:1,title:levels()[1],icon:'◔',sub:tr('Simple steps, everyday cooking','Des gestes simples, à la portée de tous')},{value:2,title:levels()[2],icon:'◑',sub:tr('A little more preparation','Un peu plus de préparation')},{value:3,title:levels()[3],icon:'◕',sub:tr('More steps and cooking techniques','Plus d’étapes et de techniques')},{value:0,title:tr('Any level','Peu importe'),icon:'✧',sub:tr('Show me every possibility','Toutes les possibilités')}];
-if(mobileStep===2)choices=[{value:1,title:tr('Budget-friendly','Économique'),icon:'€',sub:tr('Simple, affordable ingredients','Des ingrédients simples et accessibles')},{value:2,title:tr('Moderate','Modéré'),icon:'€€',sub:tr('A little more room to choose','Un peu plus de choix dans les ingrédients')},{value:0,title:tr('Any budget','Peu importe'),icon:'✧',sub:tr('Inspiration first','Priorité à l’inspiration')}];
-const selected=[mobileChoices.meal,mobileChoices.difficulty,mobileChoices.budget][mobileStep];$('mobileWizard').innerHTML=`<div class="wizard-topline">${mobileStep>0?`<button class="wizard-back" onclick="mobileBack()">${uiIcon('arrow')}${tr('Back','Retour')}</button>`:'<span></span>'}<span class="wizard-stage">${tr('STEP','ÉTAPE')} ${mobileStep+1} / 3</span></div><div class="wizard-progress" aria-label="${tr('Step','Étape')} ${mobileStep+1} ${tr('of','sur')} 3">${[0,1,2].map(i=>`<span class="${i<=mobileStep?'done':''}"></span>`).join('')}</div><span class="wizard-eyebrow">${tr('A RECIPE THAT FITS YOUR DAY','UNE RECETTE À VOTRE RYTHME')}</span><h1 tabindex="-1" id="wizardHeading">${titles[mobileStep]}</h1><p class="wizard-description">${descriptions[mobileStep]}</p><div class="wizard-choices">${choices.map(c=>{let n=mobileChoiceCount(mobileStep,c.value);return `<button class="wizard-choice ${selected===c.value?'selected':''}" onclick="mobileChoose(${c.value})" ${!n?'disabled':''}><span class="wizard-icon" aria-hidden="true">${c.icon}</span><span class="wizard-copy"><b>${c.title}</b><small>${n?`${c.sub} · ${mobileCountLabel(n)}`:tr('No recipe for this meal yet','Pas encore de recette pour ce moment')}</small></span><span class="wizard-arrow" aria-hidden="true">→</span></button>`}).join('')}</div>${mobileStep===2?`<p class="wizard-footnote">${tr('Relative budget categories, based on ingredients. Prices vary by shop.','Catégories indicatives selon les ingrédients. Les prix varient selon les magasins.')}</p>`:`<p class="wizard-footnote">${tr('Three little choices. Your next delicious idea.','Trois petits choix. Votre prochaine idée gourmande.')}</p>`}`}
-function applyMobileChoices(){meal=mobileChoices.meal;$('difficulty').value=String(mobileChoices.difficulty);$('budget').value=String(mobileChoices.budget);$('time').value='0';$('sort').value='default';$('search').value='';tags.clear();view='all'}
-function mobileChoose(value){if(mobileStep===0){mobileChoices.meal=value;mobileChoices.difficulty=0;mobileChoices.budget=0}else if(mobileStep===1){mobileChoices.difficulty=value;mobileChoices.budget=0}else mobileChoices.budget=value;if(mobileStep<2){mobileStep++;mobileUpdate(true)}else{applyMobileChoices();mobileScreen='results';render();window.scrollTo({top:0,behavior:'smooth'})}}
-function mobileBack(){if(mobileStep>0)mobileStep--;mobileUpdate(true)}
-function mobileEdit(stage){mobileStep=stage;mobileScreen='wizard';view='all';render();window.scrollTo({top:0,behavior:'smooth'});$('wizardHeading').focus({preventScroll:true})}
-function mobileHome(){if(mobileChoices.meal&&mobileScreen!=='wizard'){mobileScreen='results';applyMobileChoices()}else{mobileScreen='wizard';mobileStep=0;view='all'}render();window.scrollTo({top:0,behavior:'smooth'})}
-function mobileFavorites(){mobileScreen='favorites';view='fav';meal=0;['difficulty','budget','time'].forEach(id=>$(id).value='0');$('search').value='';tags.clear();render();window.scrollTo({top:0,behavior:'smooth'})}
-function mobileRestart(){mobileChoices.meal=0;mobileStep=0;mobileScreen='wizard';view='all';render();window.scrollTo({top:0,behavior:'smooth'});$('wizardHeading')?.focus({preventScroll:true})}
-function mobileUpdate(focus=false){
- const isWizard=mobileScreen==='wizard',favorite=mobileScreen==='favorites';$('mobileWizard').hidden=!isWizard;$('mobileResults').hidden=isWizard;
- for(const[id,active]of [['explore',!favorite],['favorites',favorite]]){$(id).classList.toggle('active',active);active?$(id).setAttribute('aria-current','page'):$(id).removeAttribute('aria-current')}
- if(isWizard)mobileWizard();else{
-  let h=$('mobileResultHeader');if(!h){h=document.createElement('div');h.id='mobileResultHeader';h.className='mobile-results-header';$('mobileResults').prepend(h)}
-  h.innerHTML=`<span class="wizard-eyebrow">${favorite?tr('SAVED FOR LATER','À GARDER SOUS LA MAIN'):tr('PICKED FOR YOUR DAY','SELON VOS ENVIES')}</span><h1>${favorite?tr('Your favorites','Vos favoris'):tr('Your recipes','Vos recettes')}</h1>${favorite?'':`<div class="mobile-summary" aria-label="${tr('Your choices','Vos choix')}"><span>${icons[mobileChoices.meal]} ${meals()[mobileChoices.meal]}</span><span>${mobileChoices.difficulty?levels()[mobileChoices.difficulty]:tr('Any level','Tous niveaux')}</span><span>${mobileChoices.budget?'€'.repeat(mobileChoices.budget):tr('Any budget','Tout budget')}</span></div><div class="mobile-result-tools"><button class="outline" onclick="mobileEdit(0)">${uiIcon('edit')}${tr('Change choices','Modifier mes choix')}</button><button class="text-button surprise-button" onclick="document.getElementById('surprise').click()" ${filtered().length?'':'disabled'}>${uiIcon('spark')}${tr('Surprise me','Surprends-moi')}</button></div>`}<p class="mobile-result-count" role="status">${mobileCountLabel(filtered().length)}</p>`;
- }
- if(focus){window.scrollTo({top:0,behavior:'smooth'});$('wizardHeading')?.focus({preventScroll:true})}
+let mobileStep = 0,
+  mobileScreen = 'wizard';
+const mobileChoices = { meal: 0, difficulty: 0, budget: 0 };
+const baseRender = render;
+function mobilePool(difficulty = mobileChoices.difficulty) {
+  return recipes.filter(
+    (r) =>
+      (!mobileChoices.meal || r.meal === mobileChoices.meal) &&
+      (!difficulty || r.difficulty === difficulty),
+  );
 }
-render=function(){baseRender();mobileUpdate()};
-$('search').oninput=()=>render();
-$('explore').onclick=mobileHome;$('favorites').onclick=mobileFavorites;$('reset').onclick=()=>{mobileStep=0;mobileScreen='wizard';view='all';reset()};
-const classicReset=reset;reset=function(){classicReset();if(mobileScreen==='results'){mobileStep=0;mobileScreen='wizard';view='all';render()}};
+function mobileChoiceCount(stage, value) {
+  if (stage === 0) return recipes.filter((r) => r.meal === value).length;
+  if (stage === 1) return mobilePool(value).length;
+  return mobilePool().filter((r) => !value || r.budget === value).length;
+}
+function mobileCountLabel(n) {
+  return tr(`${n} recipe${n === 1 ? '' : 's'}`, `${n} recette${n === 1 ? '' : 's'}`);
+}
+function mobileWizard() {
+  const titles = [
+      tr('What’s the occasion?', 'À quel moment ?'),
+      tr('How adventurous?', 'Quelle difficulté ?'),
+      tr('What’s your budget?', 'Quel budget ?'),
+    ],
+    descriptions = [
+      tr('Start with the moment of your day.', 'Commençons par le moment de votre journée.'),
+      tr(
+        'A quick win or a little cooking challenge?',
+        'Une recette toute simple ou un petit défi en cuisine ?',
+      ),
+      tr('Choose a price range per serving.', 'Choisissez une gamme de budget par portion.'),
+    ];
+  let choices = [];
+  if (mobileStep === 0)
+    choices = meals()
+      .slice(1)
+      .map((n, i) => ({
+        value: i + 1,
+        title: n,
+        icon: icons[i + 1],
+        sub: [
+          tr('A fresh start', 'Pour bien commencer'),
+          tr('Your midday break', 'La pause du midi'),
+          tr('A sweet afternoon', 'Une pause gourmande'),
+          tr('A lovely evening', 'Pour terminer la journée'),
+          tr('A little something', 'Une petite faim'),
+        ][i],
+      }));
+  if (mobileStep === 1)
+    choices = [
+      {
+        value: 1,
+        title: levels()[1],
+        icon: '◔',
+        sub: tr('Simple steps, everyday cooking', 'Des gestes simples, à la portée de tous'),
+      },
+      {
+        value: 2,
+        title: levels()[2],
+        icon: '◑',
+        sub: tr('A little more preparation', 'Un peu plus de préparation'),
+      },
+      {
+        value: 3,
+        title: levels()[3],
+        icon: '◕',
+        sub: tr('More steps and cooking techniques', 'Plus d’étapes et de techniques'),
+      },
+      {
+        value: 0,
+        title: tr('Any level', 'Peu importe'),
+        icon: '✧',
+        sub: tr('Show me every possibility', 'Toutes les possibilités'),
+      },
+    ];
+  if (mobileStep === 2)
+    choices = [
+      {
+        value: 1,
+        title: tr('Budget-friendly', 'Économique'),
+        icon: '€',
+        sub: tr('Simple, affordable ingredients', 'Des ingrédients simples et accessibles'),
+      },
+      {
+        value: 2,
+        title: tr('Moderate', 'Modéré'),
+        icon: '€€',
+        sub: tr('A little more room to choose', 'Un peu plus de choix dans les ingrédients'),
+      },
+      {
+        value: 0,
+        title: tr('Any budget', 'Peu importe'),
+        icon: '✧',
+        sub: tr('Inspiration first', 'Priorité à l’inspiration'),
+      },
+    ];
+  const selected = [mobileChoices.meal, mobileChoices.difficulty, mobileChoices.budget][mobileStep];
+  $('mobileWizard').innerHTML =
+    `<div class="wizard-topline">${mobileStep > 0 ? `<button class="wizard-back" onclick="mobileBack()">${uiIcon('arrow')}${tr('Back', 'Retour')}</button>` : '<span></span>'}<span class="wizard-stage">${tr('STEP', 'ÉTAPE')} ${mobileStep + 1} / 3</span></div><div class="wizard-progress" aria-label="${tr('Step', 'Étape')} ${mobileStep + 1} ${tr('of', 'sur')} 3">${[0, 1, 2].map((i) => `<span class="${i <= mobileStep ? 'done' : ''}"></span>`).join('')}</div><span class="wizard-eyebrow">${tr('A RECIPE THAT FITS YOUR DAY', 'UNE RECETTE À VOTRE RYTHME')}</span><h1 tabindex="-1" id="wizardHeading">${titles[mobileStep]}</h1><p class="wizard-description">${descriptions[mobileStep]}</p><div class="wizard-choices">${choices
+      .map((c) => {
+        let n = mobileChoiceCount(mobileStep, c.value);
+        return `<button class="wizard-choice ${selected === c.value ? 'selected' : ''}" onclick="mobileChoose(${c.value})" ${!n ? 'disabled' : ''}><span class="wizard-icon" aria-hidden="true">${c.icon}</span><span class="wizard-copy"><b>${c.title}</b><small>${n ? `${c.sub} · ${mobileCountLabel(n)}` : tr('No recipe for this meal yet', 'Pas encore de recette pour ce moment')}</small></span><span class="wizard-arrow" aria-hidden="true">→</span></button>`;
+      })
+      .join(
+        '',
+      )}</div>${mobileStep === 2 ? `<p class="wizard-footnote">${tr('Relative budget categories, based on ingredients. Prices vary by shop.', 'Catégories indicatives selon les ingrédients. Les prix varient selon les magasins.')}</p>` : `<p class="wizard-footnote">${tr('Three little choices. Your next delicious idea.', 'Trois petits choix. Votre prochaine idée gourmande.')}</p>`}`;
+}
+function applyMobileChoices() {
+  meal = mobileChoices.meal;
+  $('difficulty').value = String(mobileChoices.difficulty);
+  $('budget').value = String(mobileChoices.budget);
+  $('time').value = '0';
+  $('sort').value = 'default';
+  $('search').value = '';
+  tags.clear();
+  view = 'all';
+}
+function mobileChoose(value) {
+  if (mobileStep === 0) {
+    mobileChoices.meal = value;
+    mobileChoices.difficulty = 0;
+    mobileChoices.budget = 0;
+  } else if (mobileStep === 1) {
+    mobileChoices.difficulty = value;
+    mobileChoices.budget = 0;
+  } else mobileChoices.budget = value;
+  if (mobileStep < 2) {
+    mobileStep++;
+    mobileUpdate(true);
+  } else {
+    applyMobileChoices();
+    mobileScreen = 'results';
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+}
+function mobileBack() {
+  if (mobileStep > 0) mobileStep--;
+  mobileUpdate(true);
+}
+function mobileEdit(stage) {
+  mobileStep = stage;
+  mobileScreen = 'wizard';
+  view = 'all';
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  $('wizardHeading').focus({ preventScroll: true });
+}
+function mobileHome() {
+  if (mobileChoices.meal && mobileScreen !== 'wizard') {
+    mobileScreen = 'results';
+    applyMobileChoices();
+  } else {
+    mobileScreen = 'wizard';
+    mobileStep = 0;
+    view = 'all';
+  }
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function mobileFavorites() {
+  mobileScreen = 'favorites';
+  view = 'fav';
+  meal = 0;
+  ['difficulty', 'budget', 'time'].forEach((id) => ($(id).value = '0'));
+  $('search').value = '';
+  tags.clear();
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function mobileRestart() {
+  mobileChoices.meal = 0;
+  mobileStep = 0;
+  mobileScreen = 'wizard';
+  view = 'all';
+  render();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  $('wizardHeading')?.focus({ preventScroll: true });
+}
+function mobileUpdate(focus = false) {
+  const isWizard = mobileScreen === 'wizard',
+    favorite = mobileScreen === 'favorites';
+  $('mobileWizard').hidden = !isWizard;
+  $('mobileResults').hidden = isWizard;
+  for (const [id, active] of [
+    ['explore', !favorite],
+    ['favorites', favorite],
+  ]) {
+    $(id).classList.toggle('active', active);
+    active ? $(id).setAttribute('aria-current', 'page') : $(id).removeAttribute('aria-current');
+  }
+  if (isWizard) mobileWizard();
+  else {
+    let h = $('mobileResultHeader');
+    if (!h) {
+      h = document.createElement('div');
+      h.id = 'mobileResultHeader';
+      h.className = 'mobile-results-header';
+      $('mobileResults').prepend(h);
+    }
+    h.innerHTML = `<span class="wizard-eyebrow">${favorite ? tr('SAVED FOR LATER', 'À GARDER SOUS LA MAIN') : tr('PICKED FOR YOUR DAY', 'SELON VOS ENVIES')}</span><h1>${favorite ? tr('Your favorites', 'Vos favoris') : tr('Your recipes', 'Vos recettes')}</h1>${favorite ? '' : `<div class="mobile-summary" aria-label="${tr('Your choices', 'Vos choix')}"><span>${icons[mobileChoices.meal]} ${meals()[mobileChoices.meal]}</span><span>${mobileChoices.difficulty ? levels()[mobileChoices.difficulty] : tr('Any level', 'Tous niveaux')}</span><span>${mobileChoices.budget ? '€'.repeat(mobileChoices.budget) : tr('Any budget', 'Tout budget')}</span></div><div class="mobile-result-tools"><button class="outline" onclick="mobileEdit(0)">${uiIcon('edit')}${tr('Change choices', 'Modifier mes choix')}</button><button class="text-button surprise-button" onclick="document.getElementById('surprise').click()" ${filtered().length ? '' : 'disabled'}>${uiIcon('spark')}${tr('Surprise me', 'Surprends-moi')}</button></div>`}<p class="mobile-result-count" role="status">${mobileCountLabel(filtered().length)}</p>`;
+  }
+  if (focus) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    $('wizardHeading')?.focus({ preventScroll: true });
+  }
+}
+render = function () {
+  baseRender();
+  mobileUpdate();
+};
+$('search').oninput = () => render();
+$('explore').onclick = mobileHome;
+$('favorites').onclick = mobileFavorites;
+$('reset').onclick = () => {
+  mobileStep = 0;
+  mobileScreen = 'wizard';
+  view = 'all';
+  reset();
+};
+const classicReset = reset;
+reset = function () {
+  classicReset();
+  if (mobileScreen === 'results') {
+    mobileStep = 0;
+    mobileScreen = 'wizard';
+    view = 'all';
+    render();
+  }
+};
 render();
