@@ -202,7 +202,9 @@ function mobileUpdate(focus = false) {
     h.innerHTML = `<span class="wizard-eyebrow">${favorite ? tr('SAVED FOR LATER', 'À GARDER SOUS LA MAIN') : tr('PICKED FOR YOUR DAY', 'SELON VOS ENVIES')}</span><h1>${favorite ? tr('Your favorites', 'Vos favoris') : tr('Your recipes', 'Vos recettes')}</h1>${favorite ? '' : `<div class="mobile-summary" aria-label="${tr('Your choices', 'Vos choix')}"><span>${icons[mobileChoices.meal]} ${meals()[mobileChoices.meal]}</span><span>${mobileChoices.difficulty ? levels()[mobileChoices.difficulty] : tr('Any level', 'Tous niveaux')}</span><span>${mobileChoices.budget ? '€'.repeat(mobileChoices.budget) : tr('Any budget', 'Tout budget')}</span></div><div class="mobile-result-tools"><button class="outline" onclick="mobileEdit(0)">${uiIcon('edit')}${tr('Change choices', 'Modifier mes choix')}</button><button class="text-button surprise-button" onclick="document.getElementById('surprise').click()" ${filtered().length ? '' : 'disabled'}>${uiIcon('spark')}${tr('Surprise me', 'Surprends-moi')}</button></div>`}<p class="mobile-result-count" role="status">${mobileCountLabel(filtered().length)}</p>`;
   }
   if (focus) {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const wizard = $('mobileWizard');
+    if (!wizard.hidden && wizard.getBoundingClientRect().top < 0)
+      wizard.scrollIntoView({ behavior: 'smooth', block: 'start' });
     $('wizardHeading')?.focus({ preventScroll: true });
   }
 }
