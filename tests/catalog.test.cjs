@@ -4,11 +4,11 @@ const vm = require('node:vm');
 const path = require('node:path');
 const root = path.resolve(__dirname, '..');
 const context = vm.createContext({});
-for (const file of ['data.js', 'catalog-extra.js', 'photos.js']) {
+for (const file of ['data.js', 'catalog-extra.js', 'catalog-more.js', 'photos.js']) {
   vm.runInContext(fs.readFileSync(path.join(root, file), 'utf8'), context);
 }
 const data = vm.runInContext('({ recipes, ingredients })', context);
-assert.equal(data.recipes.length, 50);
+assert.equal(data.recipes.length, 100);
 assert.equal(new Set(data.recipes.map((r) => r.en)).size, data.recipes.length);
 for (const [id, recipe] of data.recipes.entries()) {
   assert.equal(recipe.id, id, 'IDs must remain stable for saved favorites');
@@ -32,4 +32,4 @@ for (let meal = 1; meal <= 5; meal++) {
     );
   }
 }
-console.log('50 bilingual recipes validated; every meal has all three difficulty levels.');
+console.log('100 bilingual recipes validated; every meal has all three difficulty levels.');

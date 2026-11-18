@@ -266,29 +266,34 @@ const extraRecipeRows = [
     17,
   ],
 ];
-for (const r of extraRecipeRows) {
-  const id = recipes.length,
-    items = r[7].split(',').map((pair) => {
-      const [k, q] = pair.split(':');
-      return [k, Number(q)];
+// Shared helper: also used by catalog-more.js. Row format:
+// [en, fr, meal, minutes, difficulty, budget, tags, items, stepsEn, stepsFr, photoReference]
+function addRecipeRows(rows) {
+  for (const r of rows) {
+    const id = recipes.length,
+      items = r[7].split(',').map((pair) => {
+        const [k, q] = pair.split(':');
+        return [k, Number(q)];
+      });
+    let nutrition = [0, 0, 0, 0];
+    for (const [k, q] of items)
+      nutrition = nutrition.map((v, i) => v + (ingredients[k][i + 3] * q) / 100);
+    const tags = r[6].split(',').filter(Boolean);
+    if ((nutrition[1] * 4) / nutrition[0] >= 0.2) tags.push('protein');
+    recipes.push({
+      id,
+      en: r[0],
+      fr: r[1],
+      meal: r[2],
+      time: r[3],
+      difficulty: r[4],
+      budget: r[5],
+      tags,
+      items,
+      nutrition: nutrition.map(Math.round),
+      steps: [r[8].split('|'), r[9].split('|')],
+      photoReference: r[10],
     });
-  let nutrition = [0, 0, 0, 0];
-  for (const [k, q] of items)
-    nutrition = nutrition.map((v, i) => v + (ingredients[k][i + 3] * q) / 100);
-  const tags = r[6].split(',').filter(Boolean);
-  if ((nutrition[1] * 4) / nutrition[0] >= 0.2) tags.push('protein');
-  recipes.push({
-    id,
-    en: r[0],
-    fr: r[1],
-    meal: r[2],
-    time: r[3],
-    difficulty: r[4],
-    budget: r[5],
-    tags,
-    items,
-    nutrition: nutrition.map(Math.round),
-    steps: [r[8].split('|'), r[9].split('|')],
-    photoReference: r[10],
-  });
+  }
 }
+addRecipeRows(extraRecipeRows);
